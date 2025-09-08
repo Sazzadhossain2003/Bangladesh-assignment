@@ -51,3 +51,31 @@ for (const btn of callButtons) {
     }
   });
 }
+
+clearBtn.addEventListener('click', function() {
+  historyBox.innerHTML = ''; 
+});
+
+
+
+let copyCount = 0;
+const copyCountSpan = document.querySelector('.span-tag');
+
+const cards = document.querySelectorAll('.bg-white');
+
+for (const card of cards) {
+  
+  const copyBtn = card.querySelector('button.btn:not(.call-btn)');
+
+  copyBtn.addEventListener('click', function() {
+    const number = card.querySelector('h1').innerText; 
+
+    navigator.clipboard.writeText(number).then(function() {
+      copyCount++; // counter update
+      copyCountSpan.textContent = copyCount;
+      
+    }).catch(function() {
+      alert('Copy failed!');
+    });
+  });
+}
